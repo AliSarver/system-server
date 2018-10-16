@@ -610,6 +610,101 @@ client.on('message', async message => {
 
 
 
+client.on('message', message => {
+    if(message.content.startsWith(prefix + 'أضافة')) {
+        if(!message.member.hasPermission('MANAGE_CHANNELS')) return;
+       
+    let args = message.content.split(' ').slice(1).join(' ');
+    if(!args) {
+        return;
+    }
+            let embed = new Discord.RichEmbed()
+                .setColor("BLACK")
+                .setAuthor("هل تريد أضافة روم كتابي او صوتي ؟")
+                .setDescription("**Text:** 📋\n\n**Voice:** 🔊");
+ 
+                message.channel.sendEmbed(embed) .then(m => {
+                    m.react('🔊')
+                    m.react('📋')
+ 
+ 
+ 
+                        let ChatFilter = (reaction, user) => reaction.emoji.name === '📋' && user.id === message.author.id;
+                        let VoiceFilter = (reaction, user) => reaction.emoji.name === '🔊' && user.id === message.author.id;
+ 
+ 
+                        let Chat = m.createReactionCollector(ChatFilter, { time: 10000 });
+                        let Voice = m.createReactionCollector(VoiceFilter, { time: 10000 });
+                       
+ 
+ 
+ 
+                Voice.on('collect', r => {
+                    message.guild.createChannel(args, "voice") .then(channel => {
+                        channel.setPosition(1);
+                        m.delete();
+                            message.channel.send(`**تم عمل روم صوتي بأسم [ \`${args}\` ] منشن الروم  [ ${channel} ] ✅**`).then(message => {message.delete(4500)})
+                           
+                    });
+                })
+ 
+                Chat.on('collect', r => {
+                    message.guild.createChannel(args, 'text') .then(channel => {
+                        channel.setPosition(1);
+                        m.delete()
+                                .then(channel.setTopic(`A text channel created by, ${message.author.tag}`));
+                               
+                            message.channel.send(`**تم عمل روم كتابي بأسم [ \`${args}\` ] منشن الروم [ <#${channel.id}> ]  ✅**`).then(message => {message.delete(4500)})
+      
+                           
+                    })
+                })
+                })
+}
+if(message.content.startsWith(prefix + 'ازالة')) {
+if(!message.member.hasPermission("MANAGE_CHANNELS")) return;
+        let args = message.content.split(' ').slice(1).join(' ');
+        if(!args) {
+            return;
+        }
+       
+    var channel = message.guild.channels.find("name", args);
+        if(channel) {
+            channel.delete();
+                message.channel.send('**تم مسح الروم بنجاح ✅**').then((x) => {
+                    x.delete(5000);
+                })
+        } else {
+            message.channel.send(`**لايوجد روم بآسم [ \`${args}\` ] ❌**`).then(message => {message.delete(3000)})
+      
+ 
+        };
+}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
