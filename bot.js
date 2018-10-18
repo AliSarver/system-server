@@ -604,7 +604,7 @@ client.on('message', async message => {
 
 
 client.on('message', message => {
-if (message.content.startsWith(prefix+"آضافة")) {
+if (message.content.startsWith(prefix+"اضافة روم صوتي")) {
     var args = message.content.split(" ").slice(1);
     var argrst = args.join(' ');
                 message.guild.createChannel(`${argrst}`,'voice')
@@ -617,6 +617,17 @@ if (message.content.startsWith(prefix+"آضافة")) {
 
 
 
+
+
+
+
+client.on('message', message => {
+if (message.content.startsWith(prefix+"اضافة روم كتابة")) {
+    var args = message.content.split(" ").slice(1);
+    var argrst = args.join(' ');
+                message.guild.createChannel(`${argrst}`, 'text')
+      }
+});
 
 
 
