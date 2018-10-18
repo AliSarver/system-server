@@ -635,4 +635,37 @@ if (message.content.startsWith(prefix+"اضافة روم كتابة")) {
 
 
 
+
+
+
+
+
+
+
+
+
+client.on("guildMemberAdd", function(member) {
+    const wc = member.guild.channels.find("Vida", "Vida-Vida")
+        const embed = new Discord.RichEmbed()
+        .setColor('B90C0C')
+        .setAuthor(member.user.tag, member.user.avatarURL)
+ .setDescription('***يا مرحبا وسهلاً بضيف لفانا، يزهي بك الأدب العربي وينثر لك أزهار يسقيك من نبع المشاعر وفانا، لين الهلا تثمر على غصونك أطيار. ***')
+.setThumbnail(member.avatarURL)
+  .setImage('https://cdn.discordapp.com/attachments/496071268609556482/501513692748185601/image0.png')
+        .setTimestamp()
+        return wc.sendEmbed(embed);
+        
+});
+
+
+
+
+
+
+
+
+
+
+
+
 client.login(process.env.BOT_TOKEN);
