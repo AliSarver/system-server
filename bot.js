@@ -603,6 +603,15 @@ client.on('message', async message => {
 
 
 
+client.on('message', message => {
+if (message.content.startsWith(prefix+"آضافة")) {
+    var args = message.content.split(" ").slice(1);
+    var argrst = args.join(' ');
+                message.guild.createChannel(`${argrst}`,'voice')
+         
+        }
+});
+
 
 
 
